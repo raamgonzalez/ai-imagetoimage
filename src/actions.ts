@@ -37,9 +37,9 @@ export async function createPrediction(formData: FormData): Promise<Prediction> 
         image: imageUrl,
         scale: 9,
         prompt: formData.get("prompt") as string,
-        a_prompt: "best quality, extremely detailed, 4k, octane render, sharp, bloom, daylight",
-        //En un futuro se puede agregar este text area para poner las cosas que no quiero
+        a_prompt:formData.get("a_prompt") as string? formData.get("n_prompt") : "best quality, extremely detailed, 4k, octane render, sharp, bloom, daylight",
         n_prompt:
+          formData.get("n_prompt") as string?  formData.get("n_prompt") :
           "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, blurry",
         ddim_steps: 20,
         num_samples: "1",
@@ -57,6 +57,7 @@ export async function createPrediction(formData: FormData): Promise<Prediction> 
     mode: "cors",
     credentials: "include",
   }).then((res) => res.json() as Promise<Prediction>);
+
 
   return prediction;
 }
