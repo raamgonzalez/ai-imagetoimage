@@ -1,6 +1,5 @@
 
 import {Skeleton} from "@/components/ui/skeleton";
-import { Label } from "@/components/ui/label";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import { Loader2 } from "lucide-react"
@@ -14,9 +13,11 @@ export default function FormContent() {
 
   return (
     <>
-      {pending ? <Skeleton className="h-[480px] w-[512px]" /> : null}
+      {pending ? <section className="w-full flex flex-col gap-4">
+        <Skeleton className="h-[256px] w-full" />
+        <Skeleton className="h-[256px] w-full" />
+      </section> : null}
       <section className="grid w-full items-center gap-1.5">
-        <Label htmlFor="picture">Picture</Label>
         <Input
           id="picture"
           accept="image/*"
@@ -30,11 +31,14 @@ export default function FormContent() {
         </p>
       </section>
       <PrompContent/>
-      {pending?  <Button disabled>
-      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      Please wait
-    </Button> : <Button>Crear</Button>}
-      
+      {pending ?  
+      <Button disabled>
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        Please wait
+      </Button> 
+      : <Button>
+        Create image
+      </Button>}
     </>
 	)
 }
